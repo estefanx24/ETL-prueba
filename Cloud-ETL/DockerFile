@@ -1,0 +1,20 @@
+# Usa una imagen base de Python
+FROM python:3.9-slim
+
+# Establece el directorio de trabajo
+WORKDIR /app
+
+# Copia el archivo de requerimientos a la imagen
+COPY requirements.txt .
+
+# Instala las dependencias
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia el código fuente del contenedor
+COPY . .
+
+# Expón el puerto para MySQL si es necesario
+EXPOSE 8005
+
+# Comando por defecto para ejecutar el script ETL
+CMD ["python", "etl.py"]
